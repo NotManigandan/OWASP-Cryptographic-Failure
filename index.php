@@ -3,7 +3,7 @@
 session_start();
 $sessionID = session_id();
 
-$conn = mysqli_connect('localhost', 'mani1', 'mani2002', 'owasptop10');
+$conn = mysqli_connect('localhost', 'localhost', '', 'owasptop10');
 
 if (!$conn) {
     echo "Unable to establish connection to Database";
@@ -11,40 +11,55 @@ if (!$conn) {
 
 $username = "";
 $password = "";
-$option = array();
+$option1 = "";
+$option2 = "";
+$status = "";
+$title = "";
+$fname = "";
+$lname = "";
+$displayUsername = "";
+$displayPassword = "";
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $option = $_POST['option'];
+    $option1 = $_POST['radio-button'];
+    $option2 = $_POST['display-button'];
 }
 
-if (in_array("encode", $option)) {
+if ($option1 == "encode") {
     $sql = "SELECT * FROM cryptographicfailureencoded WHERE username = '$username'";
+    $flag = 1;
 } else {
     $sql = "SELECT * FROM cryptographicfailurenotencoded WHERE username = '$username'";
+    $flag = 0;
 }
 
 $results = mysqli_query($conn, $sql);
 
 foreach ($results as $r) {
-
-    $pwd_check = password_verify($password, $r['password']);
-
-    if ($pwd_check) {
-        $_SESSION['username'] = $r['username'];
+    if ($flag == 1) {
+        $pwd_check = password_verify($password, $r['password']);
+    } else if ($flag == 0) {
+        if ($password == $r['password']) {
+            $pwd_check = 1;
+        } else {
+            $pwd_check = 0;
+        }
     }
-}
-
-
-if (in_array("hijack", $option)) {
-    //Code for Hijacking
-    //Code for Hijacking
-    //Code for Hijacking
-    //Code for Hijacking
-    //Code for Hijacking
-    //Code for Hijacking
-    //Code for Hijacking
+    if ($pwd_check) {
+        $_SESSION['uname'] = $r['username'];
+        $status = "Successfully Logged In !";
+        if ($option2 == "display") {
+            $title = "User Details";
+            $fname = "First Name: " . $r['First Name'];
+            $lname = "Last Name Name: " . $r['Last Name'];
+            $displayUsername = "Username: " . $r['username'];
+            $displayPassword = "Password: " . $r['password'];
+        }
+    } else {
+        $status = "Invalid Credentials";
+    }
 }
 
 if (isset($_POST['ok'])) {
@@ -66,6 +81,9 @@ if (isset($_POST['ok'])) {
 </head>
 
 <body>
+    <div class="gallery">
+        <img src="cyscomLogo.png" alt="cyscom logo">
+    </div>
     <div class="container">
         <div class="title">Cryptographic Failure</div>
         <div class="content">
@@ -82,10 +100,11 @@ if (isset($_POST['ok'])) {
                         </div>
                     </div>
                 </div>
-                <div class="gender-details">
-                    <input type="checkbox" value="plaintext" name="option[]" id="dot-1">
-                    <input type="checkbox" value="encode" name="option[]" id="dot-2">
-                    <input type="checkbox" value="hijack" name="option[]" id="dot-3">
+                <div>
+                    <input type="radio" value="plaintext" name="radio-button" id="dot-1" checked="checked">
+                    <input type="radio" value="encode" name="radio-button" id="dot-2">
+                    <input type="radio" value="display" name="display-button" id="dot-3">
+                    <input type="hidden" value="display" name="display-button" id="dot-3">
                     <div class="category">
                         <label for="dot-1">
                             <span class="dot one"></span>
@@ -97,17 +116,26 @@ if (isset($_POST['ok'])) {
                         </label>
                         <label for="dot-3">
                             <span class="dot three"></span>
-                            <span class="hijack">Hijack the Session</span>
+                            <span class="encode">Display User Details</span>
                         </label>
-
                     </div>
                 </div>
                 <div class="butn">
                     <button class="button-36" role="button" name="submit">Submit</button>
                 </div>
+                <?php echo $status;
+                if ($option2 == "display") {
+                    //echo $title . "<br>";
+                    echo "<br>" . $fname . "<br>";
+                    echo $lname . "<br>";
+                    echo $displayUsername . "<br>";
+                    echo $displayPassword . "<br>";
+                }
+                ?>
             </form>
         </div>
     </div>
+
 
 </body>
 
