@@ -16,6 +16,7 @@ body {
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
+
 div.gallery {
     position: absolute;
     top: 0%;
@@ -52,6 +53,7 @@ div.gallery img {
     border-radius: 5px;
     background: linear-gradient(135deg, #cfd8dd, #9b59b6);
 }
+
 
 .content form .user-details {
     display: flex;
