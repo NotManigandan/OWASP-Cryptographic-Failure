@@ -3,7 +3,7 @@
 session_start();
 $sessionID = session_id();
 
-$conn = mysqli_connect('localhost', 'localhost', '', 'owasptop10');
+$conn = mysqli_connect('localhost', 'mani1', 'mani2002', 'owasptop10');
 
 if (!$conn) {
     echo "Unable to establish connection to Database";
@@ -14,11 +14,7 @@ $password = "";
 $option1 = "";
 $option2 = "";
 $status = "";
-$title = "";
-$fname = "";
-$lname = "";
-$displayUsername = "";
-$displayPassword = "";
+$pwd_check = "";
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -47,7 +43,7 @@ foreach ($results as $r) {
             $pwd_check = 0;
         }
     }
-    if ($pwd_check) {
+    if ($pwd_check == 1) {
         $_SESSION['uname'] = $r['username'];
         $status = "Successfully Logged In !";
         if ($option2 == "display") {
@@ -64,7 +60,7 @@ foreach ($results as $r) {
 
 if (isset($_POST['ok'])) {
     session_destroy();
-    header("Location: /");
+    header("Location: /OWASP");
     exit();
 }
 
@@ -81,9 +77,9 @@ if (isset($_POST['ok'])) {
 </head>
 
 <body>
-    <div class="gallery">
+    <!-- <div class="gallery">
         <img src="cyscomLogo.png" alt="cyscom logo">
-    </div>
+    </div> -->
     <div class="container">
         <div class="title">Cryptographic Failure</div>
         <div class="content">
@@ -104,7 +100,7 @@ if (isset($_POST['ok'])) {
                     <input type="radio" value="plaintext" name="radio-button" id="dot-1" checked="checked">
                     <input type="radio" value="encode" name="radio-button" id="dot-2">
                     <input type="radio" value="display" name="display-button" id="dot-3">
-                    <input type="hidden" value="display" name="display-button" id="dot-3">
+                    <input type="radio" value="dontDisplay" name="display-button" id="dot-4" checked="checked">
                     <div class="category">
                         <label for="dot-1">
                             <span class="dot one"></span>
@@ -124,19 +120,22 @@ if (isset($_POST['ok'])) {
                     <button class="button-36" role="button" name="submit">Submit</button>
                 </div>
                 <?php echo $status;
-                if ($option2 == "display") {
-                    //echo $title . "<br>";
-                    echo "<br>" . $fname . "<br>";
+                if ($option2 == "display" && $pwd_check == 1) {
+                    echo "<br>" .  $title . ":<br>";
+                    echo $fname . "<br>";
                     echo $lname . "<br>";
                     echo $displayUsername . "<br>";
                     echo $displayPassword . "<br>";
                 }
                 ?>
             </form>
+            <?php if (!empty($_SESSION['uname'])) { ?>
+                <form method="POST">
+                    <button class=" button-36" role="button" name="ok">Ok</button>
+                </form>
+            <?php } ?>
         </div>
     </div>
-
-
 </body>
 
 </html>
