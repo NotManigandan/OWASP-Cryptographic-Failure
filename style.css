@@ -16,6 +16,17 @@ body {
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
+div.gallery {
+    position: absolute;
+    top: 0%;
+    left: 43%;
+}
+
+div.gallery img {
+    height: 50%;
+    width: 40%;
+}
+
 .container {
     max-width: 700px;
     width: 100%;
@@ -77,11 +88,6 @@ form .input-box span.details {
     border-color: #9b59b6;
 }
 
-form .gender-details .gender-title {
-    font-size: 20px;
-    font-weight: 500;
-}
-
 form .category {
     display: flex;
     width: 80%;
@@ -98,12 +104,13 @@ form .category label {
 form .category label .dot {
     height: 18px;
     width: 18px;
-    border-radius: 10%;
+    border-radius: 70%;
     margin-right: 10px;
     background: #d9d9d9;
     border: 5px solid transparent;
     transition: all 0.3s ease;
 }
+
 
 #dot-1:checked~.category label .one,
 #dot-2:checked~.category label .two,
@@ -112,7 +119,7 @@ form .category label .dot {
     border-color: #d9d9d9;
 }
 
-form input[type="checkbox"] {
+form input[type="radio"] {
     display: none;
 }
 
@@ -180,5 +187,3 @@ form .button {
         flex-direction: column;
     }
 }
-
-@media (min-width: 768px) {}
