@@ -3,7 +3,7 @@
 session_start();
 $sessionID = session_id();
 
-$conn = mysqli_connect('localhost', 'mani1', 'mani2002', 'owasptop10');
+$conn = mysqli_connect('localhost', 'root', '', 'owasptop10');
 
 if (!$conn) {
     echo "Unable to establish connection to Database";
