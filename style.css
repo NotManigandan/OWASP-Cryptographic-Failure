@@ -131,7 +131,7 @@ form .button {
     margin: 35px 0
 }
 
-.button-36 {
+.login-button {
     background-image: linear-gradient(92.88deg, #53504D 9.16%, #383633 43.89%, #1C1B1A 64.72%);
     border-radius: 8px;
     border-style: none;
@@ -151,7 +151,7 @@ form .button {
     touch-action: manipulation;
 }
 
-.button-36:hover {
+.login-button:hover {
     box-shadow: #8B8680 0 1px 30px;
     transition-duration: .1s;
 }
