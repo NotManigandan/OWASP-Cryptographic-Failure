@@ -2,7 +2,7 @@
 
 session_start();
 
-$conn = mysqli_connect('localhost', 'mani1', 'mani2002', 'owasptop10');
+$conn = mysqli_connect('localhost', 'localhost', '', 'owasptop10');
 //"owasptop10" is the name of the database
 
 if (!$conn) {
