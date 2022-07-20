@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-$sessionID = session_id();
 
-$conn = mysqli_connect('localhost', 'root', '', 'owasptop10');
+$conn = mysqli_connect('localhost', 'mani1', 'mani2002', 'owasptop10');
+//"owasptop10" is the name of the database
 
 if (!$conn) {
     echo "Unable to establish connection to Database";
@@ -23,6 +23,7 @@ if (isset($_POST['submit'])) {
     $option2 = $_POST['display-button'];
 }
 
+/* "cryptographicfailureencoded" & "cryptographicfailurenotencoded" are the name of tables in the database where data is data is stored in encoded format and plain text format respectively and both the table contains four columns namely "FirstName", "LastName", "username" and "password". */
 if ($option1 == "encode") {
     $sql = "SELECT * FROM cryptographicfailureencoded WHERE username = '$username'";
     $flag = 1;
@@ -49,7 +50,7 @@ foreach ($results as $r) {
         if ($option2 == "display") {
             $title = "User Details";
             $fname = "First Name: " . $r['First Name'];
-            $lname = "Last Name Name: " . $r['Last Name'];
+            $lname = "Last Name: " . $r['Last Name'];
             $displayUsername = "Username: " . $r['username'];
             $displayPassword = "Password: " . $r['password'];
         }
@@ -77,9 +78,6 @@ if (isset($_POST['ok'])) {
 </head>
 
 <body>
-    <!-- <div class="gallery">
-        <img src="cyscomLogo.png" alt="cyscom logo">
-    </div> -->
     <div class="container">
         <div class="title">Cryptographic Failure</div>
         <div class="content">
@@ -121,7 +119,7 @@ if (isset($_POST['ok'])) {
                 </div>
                 <?php echo $status;
                 if ($option2 == "display" && $pwd_check == 1) {
-                    echo "<br>" .  $title . ":<br>";
+                    echo "<br>" .  $title . ":-<br>";
                     echo $fname . "<br>";
                     echo $lname . "<br>";
                     echo $displayUsername . "<br>";
