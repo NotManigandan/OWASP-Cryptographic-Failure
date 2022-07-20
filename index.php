@@ -61,7 +61,7 @@ foreach ($results as $r) {
 
 if (isset($_POST['ok'])) {
     session_destroy();
-    header("Location: /OWASP");
+    header("Location: /");
     exit();
 }
 
