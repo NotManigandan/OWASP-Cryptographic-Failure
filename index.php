@@ -2,7 +2,7 @@
 
 session_start();
 
-$conn = mysqli_connect('localhost', 'localhost', '', 'owasptop10');
+$conn = mysqli_connect('localhost', 'mani1', 'mani2002', 'owasptop10');
 //"owasptop10" is the name of the database
 
 if (!$conn) {
@@ -115,7 +115,7 @@ if (isset($_POST['ok'])) {
                     </div>
                 </div>
                 <div class="butn">
-                    <button class="button-36" role="button" name="submit">Submit</button>
+                    <button class="login-button" role="button" name="submit">Submit</button>
                 </div>
                 <?php echo $status;
                 if ($option2 == "display" && $pwd_check == 1) {
@@ -129,7 +129,7 @@ if (isset($_POST['ok'])) {
             </form>
             <?php if (!empty($_SESSION['uname'])) { ?>
                 <form method="POST">
-                    <button class=" button-36" role="button" name="ok">Ok</button>
+                    <button class="login-button" role="button" name="ok">Ok</button>
                 </form>
             <?php } ?>
         </div>
